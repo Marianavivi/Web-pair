@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: my-web-service
+    env: static
+    buildCommand: echo 'No build step required'
+    staticPublishPath: public
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: https://external-api.example.com/:splat
+      - type: rewrite
+        source: /static/*
+        destination: /static/:splat
+    envVars:
+      - key: NODE_ENV
+        value: production
